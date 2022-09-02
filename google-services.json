@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "861812919515",
+    "project_id": "transportepublicosp",
+    "storage_bucket": "transportepublicosp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:861812919515:android:7293cc599e32ca08a810fe",
+        "android_client_info": {
+          "package_name": "com.malfaa.transportepublicosp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "861812919515-q9l24flpok7hpcsr54b9d9m7upjetupf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCeBYuL0td9-0UxWj10HDzDLoW4KkMqGM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "861812919515-q9l24flpok7hpcsr54b9d9m7upjetupf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
