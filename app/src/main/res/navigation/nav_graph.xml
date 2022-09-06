@@ -9,5 +9,27 @@
         android:id="@+id/splashScreen"
         android:name="com.malfaa.transportepublicosp.inicial.SplashScreen"
         android:label="SplashScreen"
-        tools:layout="@layout/splash_screen_fragment"/>
+        tools:layout="@layout/splash_screen_fragment">
+        <action
+            android:id="@+id/action_splashScreen_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/informativoFragment"
+        android:name="com.malfaa.transportepublicosp.informativo.InformativoFragment"
+        android:label="fragment_informativo"
+        tools:layout="@layout/fragment_informativo" >
+        <action
+            android:id="@+id/action_informativoFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.malfaa.transportepublicosp.maps.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/action_mapsFragment_to_informativoFragment"
+            app:destination="@id/informativoFragment" />
+    </fragment>
 </navigation>

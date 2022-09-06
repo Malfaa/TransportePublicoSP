@@ -1,20 +1,15 @@
 package com.malfaa.transportepublicosp.informativo
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.malfaa.transportepublicosp.R
 
 class InformativoFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = InformativoFragment()
-    }
-
-    private lateinit var viewModel: InformativoViewModel
+//    private val viewModel: InformativoViewModel by viewModel<InformativoViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,3 +23,4 @@ class InformativoFragment : Fragment() {
     }
 
 }
+//Models -> Passar os dados da interwebs(api) e popular o adapter com tais infos

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.malfaa.transportepublicosp.local.entidade.Onibus" />
+        <variable
+            name="clickListener"
+            type="com.malfaa.transportepublicosp.informativo.InformativoAdapter.OnibusListener" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/onibus_numero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/item_info"
+            app:layout_constraintBottom_toBottomOf="@+id/iconeOnibus"
+            app:layout_constraintStart_toEndOf="@+id/iconeOnibus"
+            app:layout_constraintTop_toTopOf="@+id/iconeOnibus"
+            android:hint="@string/onibus_num"/>
+
+        <TextView
+            android:id="@+id/previsaoChegada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/item_info"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iconeOnibus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/item_info"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/bus" />
+
+        <TextView
+            android:id="@+id/onibus_direcao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/item_info"
+            android:layout_marginBottom="@dimen/item_info"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/onibus_numero"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/onibus_numero"
+            app:layout_constraintTop_toBottomOf="@+id/onibus_numero" />
+
+        <ImageView
+            android:id="@+id/iconeAcessibilidade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/item_info"
+            app:layout_constraintBottom_toBottomOf="@+id/onibus_direcao"
+            app:layout_constraintStart_toEndOf="@+id/onibus_direcao"
+            app:layout_constraintTop_toTopOf="@+id/onibus_direcao"
+            app:srcCompat="@drawable/accessible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
