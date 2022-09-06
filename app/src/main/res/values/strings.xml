@@ -1,6 +1,18 @@
 <resources>
     <string name="app_name">TransportePublicoSP</string>
 
+<!--    Notificacao -->
     <string name="chegando">Ônibus chegando!</string>
+
+<!--    Menu -->
+    <string name="menu_mapa">Mapa</string>
+    <string name="menu_info">Informativo</string>
+
+    <string name="fragment_info_pesquisar">Pesquisar</string>
+    
+<!--    item_info-->
+    <string name="onibus_num">971-A</string>
+
+<!--    Debug -->
     <string name="hello">hello</string>
 </resources>
