@@ -24,7 +24,10 @@
             android:layout_margin="@dimen/informativo_dist"
             android:inputType="textPersonName"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:importantForAutofill="no" />
+<!--esse busca a linha, resultados são os buzao com diferente direcao-->
+
 
         <Button
             android:id="@+id/pesquisar"

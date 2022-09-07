@@ -2,6 +2,8 @@ package com.malfaa.transportepublicosp
 
 import android.app.Application
 import com.malfaa.transportepublicosp.informativo.InformativoViewModel
+import com.malfaa.transportepublicosp.local.linha.LinhaDatabase
+import com.malfaa.transportepublicosp.local.onibus.OnibusDatabase
 import com.malfaa.transportepublicosp.network.SPTransApi
 import com.malfaa.transportepublicosp.repository.Repositorio
 import org.koin.android.ext.koin.androidContext
@@ -16,8 +18,10 @@ class MyApp : Application(){
 
         val meuModulo = module{
 
-            viewModel{ InformativoViewModel(get()) }
-            single { Repositorio(get() as SPTransApi) }
+            single { OnibusDatabase.getInstance(this@MyApp) }
+            single { LinhaDatabase.getInstance(this@MyApp) }
+            single { Repositorio( get() as SPTransApi, get(), get()) }
+            viewModel{ InformativoViewModel(get() as Repositorio) }
 
         }
 

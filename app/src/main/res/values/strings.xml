@@ -11,7 +11,12 @@
     <string name="fragment_info_pesquisar">Pesquisar</string>
     
 <!--    item_info-->
-    <string name="onibus_num">971-A</string>
+    <string name="onibus_num">971A</string>
+    <string name="onibus_num_base">-%d</string>
+    <string name="onibus_num_base_debug">-10</string>
+    <string name="term_principal">Primavera</string>
+    <string name="term_secundario">Shopping D</string>
+    <string name="direcao_desc">Direção: esquerda à direita</string>
 
 <!--    Debug -->
     <string name="hello">hello</string>

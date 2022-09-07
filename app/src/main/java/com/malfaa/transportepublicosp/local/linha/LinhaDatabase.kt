@@ -1,29 +1,29 @@
-package com.malfaa.transportepublicosp.local
+package com.malfaa.transportepublicosp.local.linha
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.malfaa.transportepublicosp.Constante
-import com.malfaa.transportepublicosp.local.entidade.Onibus
+import com.malfaa.transportepublicosp.network.models.LinhaDir
 
-@Database(entities = [Onibus::class], version = 1, exportSchema = false)
-abstract class OnibusDatabase: RoomDatabase(){
+@Database(entities = [LinhaDir::class], version = 1, exportSchema = false)
+abstract class LinhaDatabase: RoomDatabase(){
 
-    abstract val dao: OnibusDao
+    abstract val dao: LinhaDao
 
     companion object {
         @Volatile
-        private var INSTANCE: OnibusDatabase? = null
+        private var INSTANCE: LinhaDatabase? = null
 
-        fun getInstance(context: Context): OnibusDatabase {
+        fun getInstance(context: Context): LinhaDatabase {
             synchronized(this) {
                 var instance = INSTANCE
                 if (instance == null) {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
-                        OnibusDatabase::class.java,
-                        Constante.PREVISAO_TABLE_NAME
+                        LinhaDatabase::class.java,
+                        Constante.LINHA_TABLE_NAME
                     )
                         .fallbackToDestructiveMigration()
                         .build()

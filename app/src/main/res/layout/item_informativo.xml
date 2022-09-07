@@ -1,42 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
-            name="item"
-            type="com.malfaa.transportepublicosp.local.entidade.Onibus" />
+            name="linha"
+            type="com.malfaa.transportepublicosp.network.models.LinhaDir" />
         <variable
             name="clickListener"
-            type="com.malfaa.transportepublicosp.informativo.InformativoAdapter.OnibusListener" />
+            type="com.malfaa.transportepublicosp.informativo.InformativoAdapter.LinhaListener" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:onClick="@{() -> clickListener.onClick(linha)}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
 
         <TextView
-            android:id="@+id/onibus_numero"
+            android:id="@+id/lt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/item_info"
+            android:layout_marginStart="16dp"
+            android:text="@{linha.lt}"
+            android:hint="@string/onibus_num"
             app:layout_constraintBottom_toBottomOf="@+id/iconeOnibus"
             app:layout_constraintStart_toEndOf="@+id/iconeOnibus"
             app:layout_constraintTop_toTopOf="@+id/iconeOnibus"
-            android:hint="@string/onibus_num"/>
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/previsaoChegada"
+            android:id="@+id/tl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_info"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="@{@string/onibus_num_base(linha.tl)}"
+            android:hint="@string/onibus_num_base_debug"
+            app:layout_constraintBottom_toBottomOf="@+id/lt"
+            app:layout_constraintStart_toEndOf="@+id/lt"
+            app:layout_constraintTop_toTopOf="@+id/lt"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/iconeOnibus"
@@ -45,29 +48,52 @@
             android:layout_margin="@dimen/item_info"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/bus" />
+            app:srcCompat="@drawable/bus"
+            android:contentDescription="@string/hello" />
 
         <TextView
-            android:id="@+id/onibus_direcao"
+            android:id="@+id/tp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/item_info"
-            android:layout_marginBottom="@dimen/item_info"
-            android:text="TextView"
+            android:layout_marginTop="@dimen/informativo_dist"
+            android:layout_marginBottom="@dimen/informativo_dist"
+            android:text="@{linha.tp}"
+            android:hint="@string/term_principal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/onibus_numero"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/onibus_numero"
-            app:layout_constraintTop_toBottomOf="@+id/onibus_numero" />
+            app:layout_constraintStart_toStartOf="@+id/lt"
+            app:layout_constraintTop_toBottomOf="@+id/lt" />
+
+        <TextView
+            android:id="@+id/ts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{linha.ts}"
+            android:hint="@string/term_secundario"
+            android:layout_marginStart="@dimen/informativo_dist"
+            app:layout_constraintBottom_toBottomOf="@+id/tp"
+            app:layout_constraintStart_toEndOf="@+id/direçao"
+            app:layout_constraintTop_toTopOf="@+id/tp" />
+
+<!--        <ImageView-->
+<!--            android:id="@+id/iconeAcessibilidade"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:contentDescription="@string/hello"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/tl"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/direçao"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/tl"-->
+<!--            app:srcCompat="@drawable/accessible" />-->
 
         <ImageView
-            android:id="@+id/iconeAcessibilidade"
+            android:id="@+id/direçao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/item_info"
-            app:layout_constraintBottom_toBottomOf="@+id/onibus_direcao"
-            app:layout_constraintStart_toEndOf="@+id/onibus_direcao"
-            app:layout_constraintTop_toTopOf="@+id/onibus_direcao"
-            app:srcCompat="@drawable/accessible" />
+            android:layout_marginStart="@dimen/informativo_dist"
+            app:layout_constraintBottom_toBottomOf="@+id/tp"
+            app:layout_constraintStart_toEndOf="@+id/tp"
+            app:layout_constraintTop_toTopOf="@+id/tp"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/arrow_right"
+            android:contentDescription="@string/direcao_desc" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,11 +1,11 @@
-package com.malfaa.transportepublicosp.local
+package com.malfaa.transportepublicosp.local.onibus
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.malfaa.transportepublicosp.Constante
-import com.malfaa.transportepublicosp.local.entidade.Onibus
+import com.malfaa.transportepublicosp.network.models.Onibus
 
 @Dao
 interface OnibusDao {
@@ -13,13 +13,10 @@ interface OnibusDao {
     @Query("SELECT * FROM ${Constante.PREVISAO_TABLE_NAME}")
     fun getOnibusPrevisao(): LiveData<List<Onibus>>
 
-//    @Query("SELECT * FROM ${Constante.TABLE_NAME}")
-//    fun getOnibusRealTime(): LiveData<List<Onibus>>
-
     @Insert
     suspend fun addOnibus(item: Onibus)
 
-    @Query("DROP TABLE ${Constante.PREVISAO_TABLE_NAME}")//clear db
+    @Query("DELETE FROM ${Constante.PREVISAO_TABLE_NAME}")//clear db
     suspend fun deletaListaPassada()
 
 }
