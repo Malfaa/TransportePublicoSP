@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.malfaa.transportepublicosp.databinding.ItemInformativoBinding
-import com.malfaa.transportepublicosp.local.entidade.Onibus
+import com.malfaa.transportepublicosp.network.models.LinhaDir
 
-class InformativoAdapter(private val clickListener: OnibusListener) : ListAdapter<Onibus, InformativoAdapter.ViewHolder>(ItemDiffCallBack()){
+class InformativoAdapter(private val clickListener: LinhaListener) : ListAdapter<LinhaDir, InformativoAdapter.ViewHolder>(ItemDiffCallBack()){
     //onCreate & onBind
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
@@ -23,8 +23,8 @@ class InformativoAdapter(private val clickListener: OnibusListener) : ListAdapte
 
 
     class ViewHolder private constructor(private val binding: ItemInformativoBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Onibus, clickListener: OnibusListener) {
-            binding.item = item
+        fun bind(linha: LinhaDir, clickListener: LinhaListener) {
+            binding.linha = linha
             binding.clickListener = clickListener
 
             binding.executePendingBindings()
@@ -39,18 +39,18 @@ class InformativoAdapter(private val clickListener: OnibusListener) : ListAdapte
         }
     }
 
-    class ItemDiffCallBack: DiffUtil.ItemCallback<Onibus>(){
-        override fun areItemsTheSame(oldItem: Onibus, newItem: Onibus): Boolean {
+    class ItemDiffCallBack: DiffUtil.ItemCallback<LinhaDir>(){
+        override fun areItemsTheSame(oldItem: LinhaDir, newItem: LinhaDir): Boolean {
             return oldItem == newItem
         }
 
         @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem: Onibus, newItem: Onibus): Boolean {
+        override fun areContentsTheSame(oldItem: LinhaDir, newItem: LinhaDir): Boolean {
             return oldItem === newItem
         }
     }
 
-    class OnibusListener(val clickListener: (Onibus) -> Unit) {
-        fun onClick(onibus: Onibus) = clickListener(onibus)
+    class LinhaListener(val clickListener: (LinhaDir) -> Unit) {
+        fun onClick(linha: LinhaDir) = clickListener(linha)
     }
 }

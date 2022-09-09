@@ -7,7 +7,7 @@ interface IRepositorio {
 
     //Onibus
 
-    suspend fun onibusPrevisao(codigoParada: Int,codigoLinha: Int)
+    suspend fun refreshPosicao()
 
-
+    suspend fun removerOnibus()
 }
