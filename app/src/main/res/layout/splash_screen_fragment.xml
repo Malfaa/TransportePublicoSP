@@ -17,18 +17,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.2" />
+            app:layout_constraintVertical_bias="0.2"
+            android:contentDescription="@string/onibus_desc" />
 
         <ImageView
             android:id="@+id/onibus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:src="@drawable/bus_splash"
             app:layout_constraintBottom_toBottomOf="@+id/frame"
             app:layout_constraintEnd_toEndOf="@+id/frame"
             app:layout_constraintHorizontal_bias="0.486"
             app:layout_constraintStart_toStartOf="@+id/frame"
             app:layout_constraintTop_toTopOf="@+id/frame"
-            app:layout_constraintVertical_bias="0.19999999" />
+            app:layout_constraintVertical_bias="0.19999999"
+            android:contentDescription="@string/onibus_desc" />
 
         <TextView
             android:id="@+id/titulo"
