@@ -21,11 +21,13 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:text="@={viewModel.linha}"
+            android:textAllCaps="true"
             android:layout_margin="@dimen/informativo_dist"
             android:inputType="textPersonName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:importantForAutofill="no" />
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor" />
 <!--esse busca a linha, resultados são os buzao com diferente direcao-->
 
 

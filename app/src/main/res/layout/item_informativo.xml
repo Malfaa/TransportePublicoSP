@@ -22,7 +22,7 @@
             android:id="@+id/lt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/item_info"
             android:text="@{linha.lt}"
             android:hint="@string/onibus_num"
             app:layout_constraintBottom_toBottomOf="@+id/iconeOnibus"
@@ -57,19 +57,20 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/informativo_dist"
             android:layout_marginBottom="@dimen/informativo_dist"
-            android:text="@{linha.tp}"
             android:hint="@string/term_principal"
+            app:linhaUm="@{linha}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/lt"
             app:layout_constraintTop_toBottomOf="@+id/lt" />
 
+<!--        android:text="@{linha.ts}"-->
         <TextView
             android:id="@+id/ts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{linha.ts}"
             android:hint="@string/term_secundario"
             android:layout_marginStart="@dimen/informativo_dist"
+            app:linhaDois="@{linha}"
             app:layout_constraintBottom_toBottomOf="@+id/tp"
             app:layout_constraintStart_toEndOf="@+id/direçao"
             app:layout_constraintTop_toTopOf="@+id/tp" />
@@ -83,6 +84,8 @@
 <!--            app:layout_constraintStart_toStartOf="@+id/direçao"-->
 <!--            app:layout_constraintTop_toTopOf="@+id/tl"-->
 <!--            app:srcCompat="@drawable/accessible" />-->
+
+<!--        COLOCAR O SENTIDO VIA BINDINGADAPTER (ACHO)-->
 
         <ImageView
             android:id="@+id/direçao"

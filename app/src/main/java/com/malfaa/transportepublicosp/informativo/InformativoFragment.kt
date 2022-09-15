@@ -25,6 +25,9 @@ class InformativoFragment : Fragment() {
     ): View {
         binding = FragmentInformativoBinding.inflate(inflater, container, false)
 
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
         return binding.root
     }
 
@@ -38,7 +41,7 @@ class InformativoFragment : Fragment() {
         val adapter = InformativoAdapter(
             InformativoAdapter.LinhaListener { linha ->
                 findNavController().navigate(
-                    InformativoFragmentDirections.actionInformativoFragmentToMapsFragment(linha) //fazer a conversão da linha para os onibus(posicao)((Onibus))
+                    InformativoFragmentDirections.actionInformativoFragmentToMapsFragment(linha)
                 )
             }
         )
