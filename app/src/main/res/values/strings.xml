@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">TransportePublicoSP</string>
+    
+<!--    Splash-->
+    <string name="onibus_desc">Ônibus Ícone</string>
 
 <!--    Notificacao -->
     <string name="chegando">Ônibus chegando!</string>
