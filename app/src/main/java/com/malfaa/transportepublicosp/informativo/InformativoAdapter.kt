@@ -1,6 +1,5 @@
 package com.malfaa.transportepublicosp.informativo
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -22,7 +21,7 @@ class InformativoAdapter(private val clickListener: LinhaListener) : ListAdapter
     }
 
 
-    class ViewHolder private constructor(private val binding: ItemInformativoBinding): RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ItemInformativoBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(linha: LinhaDir, clickListener: LinhaListener) {
             binding.linha = linha
             binding.clickListener = clickListener
@@ -44,13 +43,12 @@ class InformativoAdapter(private val clickListener: LinhaListener) : ListAdapter
             return oldItem == newItem
         }
 
-        @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(oldItem: LinhaDir, newItem: LinhaDir): Boolean {
-            return oldItem === newItem
+            return oldItem == newItem
         }
     }
+}
 
-    class LinhaListener(val clickListener: (LinhaDir) -> Unit) {
-        fun onClick(linha: LinhaDir) = clickListener(linha)
-    }
+class LinhaListener(val clickListener: (LinhaDir) -> Unit) {
+    fun onClick(linha: LinhaDir) = clickListener(linha)
 }

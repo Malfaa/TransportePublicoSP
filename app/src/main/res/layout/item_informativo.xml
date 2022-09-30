@@ -8,12 +8,14 @@
             type="com.malfaa.transportepublicosp.network.models.LinhaDir" />
         <variable
             name="clickListener"
-            type="com.malfaa.transportepublicosp.informativo.InformativoAdapter.LinhaListener" />
+            type="com.malfaa.transportepublicosp.informativo.LinhaListener" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:onClick="@{() -> clickListener.onClick(linha)}"
+        android:layout_marginBottom="@dimen/item_info"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
