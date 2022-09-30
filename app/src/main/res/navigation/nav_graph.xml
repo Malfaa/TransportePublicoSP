@@ -11,8 +11,8 @@
         android:label="SplashScreen"
         tools:layout="@layout/splash_screen_fragment">
         <action
-            android:id="@+id/action_splashScreen_to_mapsFragment"
-            app:destination="@id/mapsFragment" />
+            android:id="@+id/action_splashScreen_to_informativoFragment"
+            app:destination="@id/informativoFragment" />
     </fragment>
     <fragment
         android:id="@+id/informativoFragment"
@@ -28,8 +28,8 @@
         android:name="com.malfaa.transportepublicosp.maps.MapsFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" >
-        <action
-            android:id="@+id/action_mapsFragment_to_informativoFragment"
-            app:destination="@id/informativoFragment" />
+        <argument
+            android:name="linha"
+            app:argType="com.malfaa.transportepublicosp.network.models.LinhaDir" />
     </fragment>
 </navigation>

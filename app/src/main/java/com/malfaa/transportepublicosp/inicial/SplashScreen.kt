@@ -4,14 +4,14 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.malfaa.transportepublicosp.R
 import com.malfaa.transportepublicosp.databinding.SplashScreenFragmentBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : Fragment(){
@@ -27,18 +27,21 @@ class SplashScreen : Fragment(){
         super.onCreateView(inflater, container, savedInstanceState)
         binding = SplashScreenFragmentBinding.inflate(inflater, container, false)
 
-//        binding.onibus.animation = AnimationUtils.loadAnimation(requireContext(), R.anim.shake_animation)
+        viewModel.resultado.observe(viewLifecycleOwner){
+            resultado ->
+            if(resultado){
+                Handler(Looper.getMainLooper()).postDelayed({
+                    Log.d("Status", viewModel.autenticacao().toString())
+                    findNavController().navigate(
+                        SplashScreenDirections.actionSplashScreenToInformativoFragment())
+                }, 2000)
+            }else{
+                Handler(Looper.getMainLooper()).postDelayed({
+                    viewModel.autenticacao()
+                }, 7000)
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            Result.success(viewModel.autentica()).run {
-                findNavController().navigate(
-                    SplashScreenDirections.actionSplashScreenToInformativoFragment())
             }
-        }, 1800)
-
+        }
         return binding.root
-
-        //autenticar por aqui, fazer com que faça o post e o resultado dele é boolean, colocar no Result que dará procedência ao informativo fragment
-        //fazer a autenticacao
     }
 }
