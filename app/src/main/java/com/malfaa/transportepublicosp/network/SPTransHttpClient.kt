@@ -3,11 +3,7 @@ package com.malfaa.transportepublicosp.network
 import okhttp3.OkHttpClient
 
 class SPTransHttpClient : OkHttpClient() {
-
     companion object {
-
-        const val API_KEY = ""
-
         fun getClient(): OkHttpClient {
             return Builder()
                 .addInterceptor { chain ->
@@ -15,7 +11,6 @@ class SPTransHttpClient : OkHttpClient() {
                     val url = original
                         .url()
                         .newBuilder()
-                        .addQueryParameter("key", API_KEY)
                         .build()
                     val request = original
                         .newBuilder()
@@ -25,7 +20,5 @@ class SPTransHttpClient : OkHttpClient() {
                 }
                 .build()
         }
-
     }
-
 }

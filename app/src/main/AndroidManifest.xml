@@ -19,9 +19,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TransportePublicoSP"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
         <!--
+
+        android:usesCleartextTraffic="true" If you use http instead of https in your url,
+        add this line to AndroidManifest.xml in the <application> tag.
 
              To get one, follow the directions here:
 
@@ -33,7 +37,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="${mapsApi}"/>
+            android:value="${MAPS_API}"/>
 
         <activity
             android:name=".MainActivity"
