@@ -10,7 +10,7 @@ import com.malfaa.transportepublicosp.network.models.LinhaDir
 @Database(entities = [LinhaDir::class], version = 1, exportSchema = false)
 abstract class LinhaDatabase: RoomDatabase(){
 
-    abstract val dao: LinhaDao
+    abstract val ldao: LinhaDao
 
     companion object {
         @Volatile

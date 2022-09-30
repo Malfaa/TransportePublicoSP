@@ -1,6 +1,7 @@
 package com.malfaa.transportepublicosp.repository
 
-import com.malfaa.transportepublicosp.data.Result
+import android.util.Log
+import com.malfaa.transportepublicosp.Constante
 import com.malfaa.transportepublicosp.local.linha.LinhaDatabase
 import com.malfaa.transportepublicosp.local.onibus.OnibusDatabase
 import com.malfaa.transportepublicosp.network.SPTransApi
@@ -9,35 +10,46 @@ import kotlinx.coroutines.withContext
 
 class Repositorio(private val api: SPTransApi, private val linhaDB: LinhaDatabase, private val onibusDB: OnibusDatabase) : IRepositorio {
     //fetch data da Api
+    companion object{
+        lateinit var COOKIE : String
+    }
 
     //Autenticação
-    override suspend fun autenticacao(token: String):Boolean {
-        return withContext(Dispatchers.IO){
-            when(api.retrofitService.autentica(token)){
-                true -> return@withContext true
-                false -> return@withContext false
+    override suspend fun autenticacao(): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                api.retrofitService.autentica(Constante.API_KEY).apply {
+                    Log.d("Verifica", headers().toString())
+                    COOKIE = headers().get("Set-Cookie").toString()
+                }.isSuccessful
+            }catch (e: Exception) {
+                Log.e("Auth CATCH", e.toString())
+                Log.e("Auth CATCH", "Failed")
+                false
             }
         }
     }
 
     //LINHAS
-    val getLinhas = linhaDB.dao.getLinhas()
+    val getLinhas = linhaDB.ldao.getLinhas()
 
     override suspend fun refreshLinhas(termosBusca: String) {
         withContext(Dispatchers.IO){
-            val response = api.retrofitService.getLinha(termosBusca)
-            linhaDB.dao.adicionaLinha(response)
+            val response = api.retrofitService.getLinha(COOKIE ,termosBusca)
+            linhaDB.ldao.adicionaLinha(response)
         }
     }
 
     override suspend fun removerLinhas() {
         withContext(Dispatchers.IO){
-            linhaDB.dao.deletaLinhas()
+            linhaDB.ldao.deletaLinhas()
         }
     }
 
     //ONIBUS
-    val getOnibusPosicao = onibusDB.dao.getOnibusPrevisao()
+    val getOnibusPosicao = onibusDB.dao.getOnibusPrevisao().apply {
+        Log.e("Repo 54", this.value.toString())
+    }
 
     override suspend fun refreshPosicao(){
         withContext(Dispatchers.IO){
@@ -48,7 +60,7 @@ class Repositorio(private val api: SPTransApi, private val linhaDB: LinhaDatabas
 
     override suspend fun refreshPosicao(codigoLinha: Int){
         withContext(Dispatchers.IO){
-            val response = api.retrofitService.getPosicaoLinha(codigoLinha)
+            val response = api.retrofitService.getPosicaoLinha(COOKIE, codigoLinha)
             onibusDB.dao.addOnibus(response)
         }
     }

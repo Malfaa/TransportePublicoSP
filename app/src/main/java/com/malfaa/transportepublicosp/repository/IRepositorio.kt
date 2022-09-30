@@ -2,7 +2,7 @@ package com.malfaa.transportepublicosp.repository
 
 interface IRepositorio {
     //Autenticacao
-    suspend fun autenticacao(token: String): Boolean
+    suspend fun autenticacao(): Boolean
 
     //Linhas
     suspend fun refreshLinhas(termosBusca: String)
@@ -11,8 +11,6 @@ interface IRepositorio {
     //Onibus
 
     suspend fun refreshPosicao()
-
     suspend fun refreshPosicao(codigoLinha: Int)
-
     suspend fun removerOnibus()
 }

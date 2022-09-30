@@ -14,12 +14,9 @@ interface OnibusDao {
     fun getOnibusPrevisao(): LiveData<List<Onibus>>
 
     @Insert
-    suspend fun addOnibus(item: Onibus)
+    suspend fun addOnibus(item: List<Onibus>)
 
     @Query("DELETE FROM ${Constante.PREVISAO_TABLE_NAME}")//clear db
     suspend fun deletaListaPassada()
 
 }
-
-//Talvez fazer dois databases, que cada um faz uma chamada e grava no db, por exemplo um é de previsao
-// e o outro é de tempo real
