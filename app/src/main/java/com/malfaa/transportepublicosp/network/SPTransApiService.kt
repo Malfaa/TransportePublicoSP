@@ -43,6 +43,7 @@ interface SPTransApiService {
         token: String
     ): Response<String>
 
+    //Buscar Linhas
     @GET("Linha/Buscar")
     suspend fun getLinha(
         @Header("Cookie")
@@ -51,14 +52,12 @@ interface SPTransApiService {
         termosBusca: String
     ): List<LinhaDir>
 
-    @GET("Posicao/")
-    suspend fun getPosicaoTempoReal() : List<Onibus>
-
-    @GET("Posicao/")
+    //Buscar Posição dos Veículos
+    @GET("Posicao/Linha")
     suspend fun getPosicaoLinha(
         @Header("Cookie")
         cookie: String,
-        @Query("Linha?codigoLinha=")
+        @Query("codigoLinha")
         codigoLinha: Int
-    ) : List<Onibus>
+    ) : Onibus
 }
