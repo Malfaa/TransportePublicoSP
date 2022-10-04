@@ -47,21 +47,16 @@ class Repositorio(private val api: SPTransApi, private val linhaDB: LinhaDatabas
     }
 
     //ONIBUS
-    val getOnibusPosicao = onibusDB.dao.getOnibusPrevisao().apply {
+    val getOnibusPosicao = onibusDB.dao.getLocalizacaoOnibus().apply {
         Log.e("Repo 54", this.value.toString())
-    }
-
-    override suspend fun refreshPosicao(){
-        withContext(Dispatchers.IO){
-            val response = api.retrofitService.getPosicaoTempoReal()
-            onibusDB.dao.addOnibus(response)
-        }
     }
 
     override suspend fun refreshPosicao(codigoLinha: Int){
         withContext(Dispatchers.IO){
-            val response = api.retrofitService.getPosicaoLinha(COOKIE, codigoLinha)
-            onibusDB.dao.addOnibus(response)
+            val response = api.retrofitService.getPosicaoLinha(COOKIE, codigoLinha).apply {
+                Log.d("Localizacao Inserida", this.vl.toString())
+            }
+            onibusDB.dao.addOnibus(response.vl)
         }
     }
 

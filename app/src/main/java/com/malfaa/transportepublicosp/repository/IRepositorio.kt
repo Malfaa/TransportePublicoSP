@@ -9,8 +9,6 @@ interface IRepositorio {
     suspend fun removerLinhas()
 
     //Onibus
-
-    suspend fun refreshPosicao()
     suspend fun refreshPosicao(codigoLinha: Int)
     suspend fun removerOnibus()
 }
