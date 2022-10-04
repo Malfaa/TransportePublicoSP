@@ -4,10 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.malfaa.transportepublicosp.Constante
 import com.malfaa.transportepublicosp.network.models.Onibus
+import com.malfaa.transportepublicosp.network.models.VeiculosLocalizados
+import com.malfaa.transportepublicosp.utils.Converters
 
-@Database(entities = [Onibus::class], version = 1, exportSchema = false)
+@Database(entities = [VeiculosLocalizados::class], version = 1, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class OnibusDatabase: RoomDatabase(){
 
     abstract val dao: OnibusDao
@@ -23,7 +27,7 @@ abstract class OnibusDatabase: RoomDatabase(){
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         OnibusDatabase::class.java,
-                        Constante.PREVISAO_TABLE_NAME
+                        Constante.ONIBUS_TABLE_NAME
                     )
                         .fallbackToDestructiveMigration()
                         .build()
