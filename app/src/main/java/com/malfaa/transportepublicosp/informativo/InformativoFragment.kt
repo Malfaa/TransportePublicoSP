@@ -17,13 +17,6 @@ class InformativoFragment : Fragment() {
 
     private lateinit var binding: FragmentInformativoBinding
 
-    private val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-        val a = Intent(Intent.ACTION_MAIN)
-        a.addCategory(Intent.CATEGORY_HOME)
-        a.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(a)
-    }
-
     companion object{
         const val EDIT_TEXT_STATE = "EDIT_TEXT_STATE"
     }
@@ -63,6 +56,14 @@ class InformativoFragment : Fragment() {
             viewModel.pesquisarLinha(binding.busSearch.text.toString())
             binding.busSearch.text.clear()
         }
+
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            val a = Intent(Intent.ACTION_MAIN)
+            a.addCategory(Intent.CATEGORY_HOME)
+            a.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(a)
+        }
+
         //Callback
         callback.isEnabled
     }
