@@ -4,21 +4,14 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.malfaa.transportepublicosp.Constante
+import com.squareup.moshi.Json
 import kotlinx.parcelize.Parcelize
 
-@Entity(tableName = Constante.PREVISAO_TABLE_NAME)
+//@Entity(tableName = Constante.ONIBUS_TABLE_NAME)
 @Parcelize
 data class Onibus( //posicao
-    @PrimaryKey(autoGenerate = true)
-    val id: Int,
-    val hr  : String,  // Horário de referência da geração das informações  s
-    val c   : String,  // Letreiro completo  s
-    val sl  : Int,     // Informa o sentido ao qual a linha atende, onde 1 significa Terminal Principal para Terminal Secundário e 2 para Terminal Secundário para Terminal Principal
-    val cl  : Int,     // Código identificador da linha  s
-    val cp  : Int,     // código identificador da parada   s
-    val lt0 : String,  // Letreiro de destino da linha
-    val qv  : Int,     // Quantidade de veículos localizados  s
-    val a   : Boolean, // Indica se o veículo é (true) ou não (false) acessível para pessoas com deficiência
-    val py  : Double,  // Informação de latitude da localização do veículo
-    val px  : Double   // Informação de longitude da localização do veículo
+    @Json(name = "hr")
+    val hr: String,  // Horário de referência da geração das informações
+    @Json(name = "vs")
+    val vl: List<VeiculosLocalizados>
 ): Parcelable
