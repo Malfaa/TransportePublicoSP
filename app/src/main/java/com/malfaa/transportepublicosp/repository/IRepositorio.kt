@@ -1,5 +1,7 @@
 package com.malfaa.transportepublicosp.repository
 
+import com.malfaa.transportepublicosp.network.models.VeiculosLocalizados
+
 interface IRepositorio {
     //Autenticacao
     suspend fun autenticacao(): Boolean
@@ -9,6 +11,7 @@ interface IRepositorio {
     suspend fun removerLinhas()
 
     //Onibus
+    suspend fun onibus(): List<VeiculosLocalizados>
     suspend fun refreshPosicao(codigoLinha: Int)
     suspend fun removerOnibus()
 }

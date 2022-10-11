@@ -5,6 +5,7 @@ import com.malfaa.transportepublicosp.Constante
 import com.malfaa.transportepublicosp.local.linha.LinhaDatabase
 import com.malfaa.transportepublicosp.local.onibus.OnibusDatabase
 import com.malfaa.transportepublicosp.network.SPTransApi
+import com.malfaa.transportepublicosp.network.models.VeiculosLocalizados
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -47,8 +48,10 @@ class Repositorio(private val api: SPTransApi, private val linhaDB: LinhaDatabas
     }
 
     //ONIBUS
-    val getOnibusPosicao = onibusDB.dao.getLocalizacaoOnibus().apply {
-        Log.e("Repo 54", this.value.toString())
+    override suspend fun onibus():List<VeiculosLocalizados> {
+        return withContext(Dispatchers.IO) {
+            onibusDB.dao.getLocalizacaoOnibus()
+        }
     }
 
     override suspend fun refreshPosicao(codigoLinha: Int){

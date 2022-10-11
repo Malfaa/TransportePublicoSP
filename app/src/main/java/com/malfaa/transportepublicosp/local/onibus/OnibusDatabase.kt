@@ -6,7 +6,6 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.malfaa.transportepublicosp.Constante
-import com.malfaa.transportepublicosp.network.models.Onibus
 import com.malfaa.transportepublicosp.network.models.VeiculosLocalizados
 import com.malfaa.transportepublicosp.utils.Converters
 
