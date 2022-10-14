@@ -3,32 +3,33 @@ package com.malfaa.transportepublicosp.maps
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
-import androidx.fragment.app.Fragment
-
+import android.content.res.Resources
+import android.graphics.Color
 import android.os.Bundle
-import android.view.*
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-
 import com.google.android.gms.maps.CameraUpdateFactory
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.malfaa.transportepublicosp.R
 import com.malfaa.transportepublicosp.databinding.FragmentMapsBinding
-import org.koin.androidx.compose.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class MapsFragment : Fragment() {
 
     companion object{
-        private val TAG = "SelectLocationFragment"
         private const val REQUEST_LOCATION_PERMISSION_REQUEST_CODE = 1
-        private const val TURN_DEVICE_LOCATION_ON_REQUEST_CODE = 29
     }
     private val callback = OnMapReadyCallback { googleMap ->
         /**
@@ -40,27 +41,52 @@ class MapsFragment : Fragment() {
          * install it inside the SupportMapFragment. This method will only be triggered once the
          * user has installed Google Play services and returned to the app.
          */
-//        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        setMapStyle(googleMap)
 
-        setPoiClick(googleMap)//map
+        Handler(Looper.getMainLooper()).postDelayed({
+            try{
+                viewModel.fileLeituraTrips(requireContext(),args.linha.lt, args.linha.tl, args.linha.sl).apply {
+                    shapeid = this
+                }
+            }catch (e:Exception){
+                Log.e("Error Callback",e.toString())
+            }finally {
+                viewModel.retornaCoordenadasRota(requireContext(),shapeid).run {
+                    googleMap.addPolyline(
+                        PolylineOptions()
+                            .addAll(this)
+                            .color(Color.RED)
+                    )
+                }
+            }
 
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            enableMyLocation()
-        } else {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                REQUEST_LOCATION_PERMISSION_REQUEST_CODE)
-        }
+            setOnibusMarkers(googleMap)
+            setLargadaChegada(googleMap, viewModel.markersLargadaChegada)
+            movimentoCamera(googleMap)
+
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+            {
+                enableMyLocation(googleMap)
+            } else {
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    REQUEST_LOCATION_PERMISSION_REQUEST_CODE
+                )
+                enableMyLocation(googleMap)
+            }
+        },1500)
+        map = googleMap
     }
 
     private lateinit var binding: FragmentMapsBinding
     private val viewModel: MapsViewModel by viewModel()
     private val args : MapsFragmentArgs by navArgs()
+    private lateinit var shapeid: String
     private lateinit var map: GoogleMap
-    private var location : Marker? = null
+    val markers = mutableListOf<Marker>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,61 +102,90 @@ class MapsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val mapFragment = binding.map.getFragment() as SupportMapFragment? //childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        val mapFragment =
+            binding.map.getFragment() as SupportMapFragment?
 
         viewModel.args.value = args  //onStarted
 
         mapFragment?.getMapAsync(callback)
 
-    }
+        binding.refresher.setOnClickListener {
+            viewModel.refreshOnibus()
+            binding.refresher.isEnabled = false
+            viewModel.testeSeAlteraAsPosicoes.value = false
 
-
-    private fun setPoiClick(map: GoogleMap) {
-        for (onibus in viewModel.onibus.value!!){
-            val latLng = LatLng(onibus.py,onibus.px)
-            val poiMarker = map.addMarker(
-                MarkerOptions()
-                    .position(latLng)
-                    .title(onibus.c)
-            )
-            location?.remove()
-            location = poiMarker
+            Handler(Looper.getMainLooper()).postDelayed({
+                deletarOnibusMarkers()
+                binding.refresher.isEnabled = true
+                viewModel.testeSeAlteraAsPosicoes.value = true
+            }, 1500)
         }
 
-    }
- /*
+        binding.posicionamento.setOnClickListener {
+            movimentoCamera(map)
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        map = googleMap
-
-        setPoiClick(map)
-
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            enableMyLocation()
-        } else {
-            requestPermissions(
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                REQUEST_LOCATION_PERMISSION_REQUEST_CODE)
         }
     }
 
-*/
-    // Checks that users have given permission
-    private fun isPermissionGranted(): Boolean {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R){
-            val foregroundCheck =
-                ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-            return foregroundCheck == PackageManager.PERMISSION_GRANTED
+    override fun onStart() {
+        super.onStart()
+        viewModel.refreshOnibus()
+    }
+
+    private fun setOnibusMarkers(map: GoogleMap) {
+        viewModel.testeSeAlteraAsPosicoes.observe(viewLifecycleOwner){
+                valor ->
+            if (valor) {
+                for (onibus in viewModel.onibus) {
+                    val latLng = LatLng(onibus.py, onibus.px)
+                    markers.add(
+                        map.addMarker(MarkerOptions().position(latLng).icon(
+                            viewModel.bitmapDescriptorFromVector(
+                                requireContext(),
+                                R.drawable.ic_onibus
+                            )
+                        ))!!
+                    )
+                }
+            }
         }
-        return false
+    }
+    private fun deletarOnibusMarkers(){
+        for(i in markers){
+            i.remove()
+        }
+        markers.clear()
+    }
+
+    private fun setLargadaChegada(map: GoogleMap, markers: List<LatLng>){
+        map.addMarker(
+            MarkerOptions()
+                .position(markers[0])
+                .icon(viewModel.bitmapDescriptorFromVector(requireContext(), R.drawable.ic_largada)) //largada
+        )
+        map.addMarker(
+            MarkerOptions()
+                .position(markers[1])
+                .icon(viewModel.bitmapDescriptorFromVector(requireContext(), R.drawable.ic_chegada)) //chegada
+        )
+    }
+
+    private fun movimentoCamera(map: GoogleMap){
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(viewModel.camera, 13f))
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.deletarDBDesatualizado()
     }
 
     // Checks if users have given their location and sets location enabled if so.
     @SuppressLint("MissingPermission")
-    private fun enableMyLocation() {
-        if (isPermissionGranted()) {
+    private fun enableMyLocation(map: GoogleMap) {
+        val foregroundCheck =
+            ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+
+        if (foregroundCheck == PackageManager.PERMISSION_GRANTED) {
             map.isMyLocationEnabled = true
         }
         else {
@@ -142,24 +197,20 @@ class MapsFragment : Fragment() {
         }
     }
 
-//    override fun onRequestPermissionsResult(
-//        requestCode: Int,
-//        permissions: Array<String>,
-//        grantResults: IntArray) {
-//        // Check if location permissions are granted and if so enable the
-//        // location data layer.
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//
-//        if (requestCode == REQUEST_LOCATION_PERMISSION_REQUEST_CODE) {
-//            if (grantResults.isNotEmpty() &&
-//                grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//
-//                enableMyLocation()
-//
-//            } else {
-////            viewModel.showSnackBarInt.value = R.string.permission_denied_explanation
-//            }
-//        }
-//    }
+    private fun setMapStyle(map: GoogleMap) {
+        try {
+            val success = map.setMapStyle(
+                MapStyleOptions.loadRawResourceStyle(
+                    requireContext(),
+                    R.raw.map_style
+                )
+            )
 
+            if (!success) {
+                Log.e( "Failed Parsing Style", "Style parsing failed.")
+            }
+        } catch (e: Resources.NotFoundException) {
+            Log.e("Error Parsing Style", "Can't find style. Error: ", e)
+        }
+    }
 }
