@@ -179,7 +179,6 @@ class MapsFragment : Fragment() {
         viewModel.deletarDBDesatualizado()
     }
 
-    // Checks if users have given their location and sets location enabled if so.
     @SuppressLint("MissingPermission")
     private fun enableMyLocation(map: GoogleMap) {
         val foregroundCheck =

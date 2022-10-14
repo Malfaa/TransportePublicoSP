@@ -72,6 +72,5 @@ class InformativoFragment : Fragment() {
         val item = binding.busSearch.text.toString()
         super.onSaveInstanceState(outState)
         outState.putString(EDIT_TEXT_STATE, item)
-        //verificar se precisa salvar instancia de request da api
     }
 }

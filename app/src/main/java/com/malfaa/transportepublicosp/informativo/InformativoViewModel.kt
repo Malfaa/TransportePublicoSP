@@ -25,9 +25,7 @@ class InformativoViewModel(private val repositorio: Repositorio) : ViewModel() {
 
     fun apagarDadosVencidos(){
         viewModelScope.launch {
-            repositorio.removerLinhas().apply {
-                Log.d("IVM 29 - Database","Apagado")
-            }
+            repositorio.removerLinhas()
         }
     }
 }
