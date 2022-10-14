@@ -29,11 +29,22 @@
             android:id="@+id/refresher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> viewModel.acaoDeRefresh()}"
             android:src="@drawable/refresh"
             android:layout_margin="@dimen/informativo_dist"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:contentDescription="@string/hello" />
+            android:contentDescription="@string/refresh" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/posicionamento"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:layout_margin="@dimen/informativo_dist"
+            android:layout_marginEnd="36dp"
+            android:layout_marginBottom="32dp"
+            android:contentDescription="@string/reposicionar"
+            android:src="@drawable/ic_location_searching"
+            app:layout_constraintBottom_toTopOf="@+id/refresher"
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

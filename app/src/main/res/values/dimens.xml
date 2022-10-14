@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="informativo_dist">16dp</dimen>
+    <dimen name="dist_entre_fabs">32dp</dimen>
 
     <dimen name="item_info">12dp</dimen>
 </resources>

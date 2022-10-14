@@ -6,11 +6,19 @@
         <entry key="app/src/main/res/drawable/accessible.xml" value="0.19" />
         <entry key="app/src/main/res/drawable/bus.xml" value="0.348" />
         <entry key="app/src/main/res/drawable/buss.xml" value="0.348" />
+        <entry key="app/src/main/res/drawable/ic_chegada.xml" value="0.348" />
+        <entry key="app/src/main/res/drawable/ic_gb.xml" value="0.348" />
+        <entry key="app/src/main/res/drawable/ic_largada.xml" value="0.348" />
+        <entry key="app/src/main/res/drawable/ic_location_searching.xml" value="0.348" />
+        <entry key="app/src/main/res/drawable/ic_onibus.xml" value="0.19" />
+        <entry key="app/src/main/res/drawable/ic_onibus_35x35.xml" value="0.19" />
+        <entry key="app/src/main/res/drawable/ic_onibus_icone.xml" value="0.237" />
+        <entry key="app/src/main/res/drawable/ic_onibus_icone_maps.xml" value="0.348" />
         <entry key="app/src/main/res/drawable/refresh.xml" value="0.346" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35989583333333336" />
         <entry key="app/src/main/res/layout/fragment_autenticacao.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/layout/fragment_informativo.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_maps.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_maps.xml" value="0.36542669584245074" />
         <entry key="app/src/main/res/layout/item_informativo.xml" value="0.1" />
         <entry key="app/src/main/res/layout/splash_screen_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.37447916666666664" />

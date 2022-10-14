@@ -24,6 +24,10 @@
     <string name="term_secundario">Shopping D</string>
     <string name="direcao_desc">Direção: esquerda à direita</string>
 
-<!--    Debug -->
+<!--    Maps-->
+    <string name="reposicionar">Voltar Posição Inicial</string>
+    <string name="refresh">Recarregar Localizações</string>
+
+    <!--    Debug -->
     <string name="hello">hello</string>
 </resources>
