@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="linha"
+            type="com.malfaa.transportepublicosp.network.models.LinhaDir" />
+        <variable
+            name="clickListener"
+            type="com.malfaa.transportepublicosp.informativo.LinhaListener" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:onClick="@{() -> clickListener.onClick(linha)}"
+        android:layout_marginBottom="@dimen/item_info"
+        android:background="@color/white"
+        android:paddingEnd="@dimen/padding_tablet_var"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/lt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/item_info"
+            android:text="@{linha.lt}"
+            android:hint="@string/onibus_num"
+            app:layout_constraintBottom_toBottomOf="@+id/iconeOnibus"
+            app:layout_constraintStart_toEndOf="@+id/iconeOnibus"
+            app:layout_constraintTop_toTopOf="@+id/iconeOnibus"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/tl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/onibus_num_base(linha.tl)}"
+            android:hint="@string/onibus_num_base_debug"
+            app:layout_constraintBottom_toBottomOf="@+id/lt"
+            app:layout_constraintStart_toEndOf="@+id/lt"
+            app:layout_constraintTop_toTopOf="@+id/lt"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/iconeOnibus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/item_info"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/bus"
+            android:contentDescription="@string/hello" />
+
+        <TextView
+            android:id="@+id/tp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/informativo_dist"
+            android:layout_marginBottom="@dimen/informativo_dist"
+            android:hint="@string/term_principal"
+            app:linhaUm="@{linha}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/lt"
+            app:layout_constraintTop_toBottomOf="@+id/lt" />
+
+<!--        android:text="@{linha.ts}"-->
+        <TextView
+            android:id="@+id/ts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/term_secundario"
+            android:layout_marginStart="@dimen/informativo_dist"
+            app:linhaDois="@{linha}"
+            app:layout_constraintBottom_toBottomOf="@+id/tp"
+            app:layout_constraintStart_toEndOf="@+id/direçao"
+            app:layout_constraintTop_toTopOf="@+id/tp" />
+
+<!--        <ImageView-->
+<!--            android:id="@+id/iconeAcessibilidade"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:contentDescription="@string/hello"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/tl"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/direçao"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/tl"-->
+<!--            app:srcCompat="@drawable/accessible" />-->
+
+<!--        COLOCAR O SENTIDO VIA BINDINGADAPTER (ACHO)-->
+
+        <ImageView
+            android:id="@+id/direçao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/informativo_dist"
+            app:layout_constraintBottom_toBottomOf="@+id/tp"
+            app:layout_constraintStart_toEndOf="@+id/tp"
+            app:layout_constraintTop_toTopOf="@+id/tp"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/arrow_right"
+            android:contentDescription="@string/direcao_desc" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

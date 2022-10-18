@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<!--    Informativo Layout-->
     <dimen name="informativo_dist">16dp</dimen>
     <dimen name="dist_entre_fabs">32dp</dimen>
 
+<!--    Item Informativo Layout-->
     <dimen name="item_info">12dp</dimen>
+
+<!--    Item Tablet Layout-->
+    <dimen name="padding_tablet_var">80dp</dimen>
 </resources>
