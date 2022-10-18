@@ -14,9 +14,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_onibus"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_onibus"
         android:supportsRtl="true"
         android:theme="@style/Theme.TransportePublicoSP"
         android:usesCleartextTraffic="true"
@@ -27,13 +27,6 @@
         android:usesCleartextTraffic="true" If you use http instead of https in your url,
         add this line to AndroidManifest.xml in the <application> tag.
 
-             To get one, follow the directions here:
-
-                https://developers.google.com/maps/documentation/android-sdk/get-api-key
-
-             Once you have your API key (it starts with "AIza"), define a new property in your
-             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
-             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
