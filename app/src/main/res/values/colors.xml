@@ -11,4 +11,14 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#F1F1F1</color>
+
+<!--    dark theme-->
+    <color name="primaryNightColor">#312F2F</color>
+    <color name="primaryNightLightColor">#fffffb</color>
+    <color name="primaryNightDarkColor">#535353</color>
+    <color name="primaryNightDarkColorItem">#8F8D8D</color>
+    <color name="secondaryNightColor">#56A1C3</color>
+    <color name="secondaryNightLightColor">#35E6E6</color>
+    <color name="secondaryNightDarkColor">#36758F</color>
+
 </resources>

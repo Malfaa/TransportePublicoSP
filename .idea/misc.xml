@@ -18,12 +18,12 @@
         <entry key="app/src/main/res/drawable/refresh.xml" value="0.346" />
         <entry key="app/src/main/res/layout-land/fragment_informativo.xml" value="0.173828125" />
         <entry key="app/src/main/res/layout-sw600dp/fragment_informativo.xml" value="0.2" />
-        <entry key="app/src/main/res/layout-sw600dp/item_informativo.xml" value="0.2861672611969877" />
+        <entry key="app/src/main/res/layout-sw600dp/item_informativo.xml" value="0.2518796992481203" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35989583333333336" />
         <entry key="app/src/main/res/layout/fragment_autenticacao.xml" value="0.37552083333333336" />
-        <entry key="app/src/main/res/layout/fragment_informativo.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_informativo.xml" value="0.14" />
         <entry key="app/src/main/res/layout/fragment_maps.xml" value="0.150856665273715" />
-        <entry key="app/src/main/res/layout/item_informativo.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_informativo.xml" value="0.33" />
         <entry key="app/src/main/res/layout/splash_screen_fragment.xml" value="0.11" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.19" />

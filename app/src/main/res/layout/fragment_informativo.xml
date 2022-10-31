@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/informativo_dist"
             android:ems="10"
+            style="@style/item_search"
             android:hint="@string/bus_search_label"
             android:importantForAutofill="no"
             android:inputType="textCapCharacters"

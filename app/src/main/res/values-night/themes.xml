@@ -2,15 +2,25 @@
     <!-- Base application theme. -->
     <style name="Theme.TransportePublicoSP" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/primaryDarkColor</item>
-        <item name="colorPrimaryVariant">@color/primaryColor</item>
-        <item name="colorOnPrimary">@color/secondaryTextColor</item>
+        <item name="colorPrimary">@color/primaryNightColor</item>
+        <item name="colorPrimaryVariant">@color/primaryNightDarkColor</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/secondaryDarkColor</item>
-        <item name="colorSecondaryVariant">@color/primaryColor</item>
-        <item name="colorOnSecondary">@color/primaryTextColor</item>
+        <item name="colorSecondary">@color/secondaryNightColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryNightDarkColor</item>
+        <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="item_info" parent="">
+        <item name="android:background">@color/primaryNightDarkColorItem</item>
+    </style>
+
+    <style name="item_search" parent="">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:editTextColor">@color/black</item>
+        <item name="android:textColorHint">@color/black</item>
     </style>
 </resources>

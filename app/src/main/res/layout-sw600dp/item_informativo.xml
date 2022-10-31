@@ -15,7 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:onClick="@{() -> clickListener.onClick(linha)}"
         android:layout_marginBottom="@dimen/item_info"
-        android:background="@color/white"
+        style="@style/item_info"
         android:paddingEnd="@dimen/padding_tablet_var"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">

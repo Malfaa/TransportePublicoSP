@@ -13,4 +13,15 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="item_info" parent="">
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="item_search" parent="">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:editTextColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+
+    </style>
 </resources>

@@ -160,12 +160,12 @@ class MapsFragment : Fragment() {
     private fun setLargadaChegada(map: GoogleMap, markers: List<LatLng>){
         map.addMarker(
             MarkerOptions()
-                .position(markers[0])
+                .position(markers[1])
                 .icon(viewModel.bitmapDescriptorFromVector(requireContext(), R.drawable.ic_largada)) //largada
         )
         map.addMarker(
             MarkerOptions()
-                .position(markers[1])
+                .position(markers[0])
                 .icon(viewModel.bitmapDescriptorFromVector(requireContext(), R.drawable.ic_chegada)) //chegada
         )
     }
